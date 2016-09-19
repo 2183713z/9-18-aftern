@@ -1,7 +1,6 @@
-import React, { PropTypes } from 'react'
-import marked from 'marked'
 
 
+```js
 class Marked extends React.Component {
   render () {
     // console.log(marked(' # I am using __markdown__.'));
@@ -13,3 +12,5 @@ class Marked extends React.Component {
     )
   }
 }
+
+```
