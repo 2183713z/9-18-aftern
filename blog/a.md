@@ -1,35 +1,15 @@
-import axios from 'axios';
+import React, { PropTypes } from 'react'
+import marked from 'marked'
 
-function searchGit(add){
-  let address=`https://api.github.com/users/${add}`
-  return axios.get(address)
-    .then((res) => (
-    { getData:res.data }
-  ))
-    .catch(function (error) {
-      alert(error);
-    });
-}
 
-function getJson(){
-  let address=`https://raw.githubusercontent.com/2183713z/9-18-aftern/master/card.json?${Math.random()}`
-  return axios.get(address)
-    .then( (res) =>(
-      {getJson:res.data}
-    ))
-    .catch(function (error){
-      alert(error)
-    })
+class Marked extends React.Component {
+  render () {
+    // console.log(marked(' # I am using __markdown__.'));
+    let content=marked('_asd_')
+    return(
+      <div>
+        <div dangerouslySetInnerHTML={{__html:content}} />
+      </div>
+    )
+  }
 }
-
-function getMd(add){
-  let address=`https://raw.githubusercontent.com/2183713z/9-18-aftern/master/blog/${add}.md`
-  return axios.get(address)
-    .then( (res) =>(
-      {getMd:res.data}
-    ))
-    .catch(function (error){
-      alert(error)
-    })
-}
-export {searchGit,getJson,getMd}
