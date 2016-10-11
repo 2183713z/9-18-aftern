@@ -1,8 +1,40 @@
-## 我是b页面
+# jiahao 的简历
+[jiiahao](https://github.com/jiahaog)
+### JS 顶级大牛
+[baidu](https://www.baidu.com)
 
-哎，我天天逃课
+ TJ: https://github.com/tj express 作者
+ Liming: https://github.com/limingth 毛豆网 CEO
+ Dan: https://github.com/gaearon redux 作者，react 项目老大 face of react
 
-```js
-console.log('bbb');
+ 尤小右：https://github.com/yyx990803 vuejs 作者
+### 编程网站
 
-```
+ 慕课网  http://www.imooc.com/
+### 当代网站架构（微服务）
+
+  实际上，我们自己的网站的前端和后端都可以认为是一个独立的网站，可以分别部署到完全不同的两台服务器上，对应不同的域名。那么既然我们的客户端可以调用我们自己实现的 API ，所以当然也完全可以去请求其他网站的 API ，所以摩登的 Web App 往往都是如下的架构，会通过 API 的形式去请求很多的第三方 API 服务。
+
+  ![](https://github.com/happypeter/digicity-express-api/blob/master/doc/img/004-micro-service.png?raw=true)
+### 路由，routes
+
+   routes 会同时出现在 express 后台和 react 前台，作用相同
+
+   > 根据请求路径（包括 http 动词）的不同，决定要触发哪一部分代码
+
+
+   但是，客户端路由，可以认为是“页面路由”，而服务器端的路由，可以叫做”API 路由“ 。
+### 什么是 nodejs ？
+
+Nodejs 就是一个运行于本地的 JS 的解释器，可以让我们脱离浏览器，来使用 JS 。Nodejs 就是扒了皮的 Chrome 。
+### 最终项目代码
+
+https://coding.net/u/happypeter/p/react-express-api-demo/git
+### 职场经验自媒体推荐
+ Youku 自媒体：罗辑思维
+### 配置文件
+一些程序各部分公用的信息，或者需要用户自定制修改的信息，一般都会放在配置文件中。
+### 给 from 的 input 设置默认值
+谷歌一下 ”react form default value"
+### react-router 从路径中获取参数的过程
+![](https://github.com/happypeter/digicity-express-api/blob/master/doc/img/005-route.png?raw=true)
