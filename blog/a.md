@@ -1,18 +1,19 @@
-```js
-我是a页面
+## 我是a页面
 
-React基础知识详解
+<h1 style="font-size: 40px;text-align:center;color: #007cdc;">React基础知识详解</h1>
 
-除组件化、虚拟DOM在复用以及性能上带来的一般好处外，React思想使得开发者之间更好的分工与合作，在配合上非常顺畅，规范的接口以及极强的约束，使得整个代码结构清晰，不同开发者的代码高度一致。
+> 除组件化、虚拟DOM在复用以及性能上带来的一般好处外，React思想使得开发者之间更好的分工与合作，在配合上非常顺畅，规范的接口以及极强的约束，使得整个代码结构清晰，不同开发者的代码高度一致。
+
 下面主要讲解ES6语法来写React组件代码，提前明确以下几点：
 
-不支持 getInitialState 在设置组件初始的 state ，可在组件的 constructor 中通过 this.state 设置，也可直接作为 properties 定义
-propTypes、defaultProps 作为 properties 定义，也可在组件外部通过键值对方式设置。
-不支持 mixins，可以使用高阶组件写法，或者 decorator。
-1. 顶层API
+- 不支持 `getInitialState` 在设置组件初始的 `state` ，可在组件的 `constructor` 中通过 `this.state` 设置，也可直接作为 `properties` 定义
+- `propTypes、defaultProps` 作为 `properties` 定义，也可在组件外部通过键值对方式设置。
+- 不支持 `mixins`，可以使用*高阶组件*写法，或者 `decorator`。
+
+## 1. 顶层API
 
 最简单的React组件及其渲染
-
+```js
 import React, { Component } from 'react';
 
 /**
@@ -28,8 +29,10 @@ class SimpleComponent extends Component {
 console.log( React );
 
 export default SimpleComponent;
-react.js
+```
 
+### `react.js`
+```js
 React.Children: Object
 React.Component: ReactComponent(props, context, updater)
 React.DOM: Object
@@ -40,40 +43,52 @@ React.createElement: (type, props, children)
 React.createFactory: (type)
 React.createMixin: (mixin)
 React.isValidElement: (object)
-Component API
+```
 
+Component API
+```js
 this.context: Object
 this.props: Object
 this.refs: Object
 this.state: Object
 this.setState: Object
-react-dom.js
+```
+### `react-dom.js`
 
+```js
 ReactDOM.findDOMNode: findDOMNode(componentOrElement)
 ReactDOM.render: ()
 ReactDOM.unmountComponentAtNode: (container)
-react-dom-server.js
+```
 
+### `react-dom-server.js`
+
+```
 ReactDOMServer.renderToString
 ReactDOMServer.renderToStaticMarkup
-2. jsx语法
+```
+
+## 2. jsx语法
 
 类似 xml 的语法，用来描述组件树
-
+```
 <div classname="x">
   <a href="#">#</a>
     <component x="y">1</component>
 </div>
+```
 不用JSX，用React提供的API写的话
-
+```js
 React.createElement('div',{
   className:'x'
     },[
     React.createElement('a',{href:'#'},'#'),
     React.createElement(Component,{x:'y'},1);
 ]);
-2.1 注释、命名、根元素个数、JSX 嵌入变量
+```
 
+### 2.1 注释、命名、根元素个数、JSX 嵌入变量
+```js
 import React, { Component } from 'react';
 
 // 1. 组件命名遵循驼峰命名，首字母大写
@@ -98,9 +113,12 @@ class ComponentDemo extends Component {
 }
 
 export default ComponentDemo;
-React只有一个限制， 组件只能渲染单个根节点。如果你想要返回多个节点，它们必须被包含在同一个节点里。
-2.2 styles
+```
 
+- React只有一个限制， 组件只能渲染单个根节点。如果你想要返回多个节点，它们必须被包含在同一个节点里。
+
+### 2.2 styles
+```js
 import React, { Component } from 'react';
 
 class StyleDemo extends Component {
@@ -120,10 +138,10 @@ class StyleDemo extends Component {
 }
 
 export default StyleDemo;
-2.3 JSX SPREAD
-
+```
+### 2.3  JSX SPREAD
 可以用通过 {...obj} 来批量设置一个对象的键值对到组件的属性，注意顺序
-
+```js
 import React, { Component } from 'react';
 
 class SpreadDemo extends Component {
@@ -136,18 +154,22 @@ class SpreadDemo extends Component {
 }
 
 export default SpreadDemo;
-2.4 属性名不能和 js 关键字冲突
+
+```
+### 2.4 属性名不能和 js 关键字冲突
 
 例如：className, readOnly, htmlfor
 
-3. 数据流：state props propType
 
-3.1 state && setState
+## 3. 数据流：state props propType
 
-用状态控制组件变化 可以把一个组件看做一个状态机, 每一次状态对应于组件的一个 ui
+### 3.1 state && setState
+用状态控制组件变化
+可以把一个组件看做一个状态机, 每一次状态对应于组件的一个 ui
 
-组件内部的状态，可以使用 state
+**组件内部的状态，可以使用 state**
 
+```js
 import React, { Component } from 'react';
 
 class StateDemo extends Component {
@@ -176,17 +198,21 @@ class StateDemo extends Component {
 }
 
 export default StateDemo;
-3.2 props
 
+```
+
+
+### 3.2 props
 通过 this.props 可以获取传递给该组件的属性值，还可以通过定义 getDefaultProps 来指定默认属性值（这是ES5的写法，ES6定义组件的默认props可以直接写props）
 
 下面几个是props的常用API：
+- `this.props.children`
+- `this.props.map`
+- `this.props.filter`
 
-this.props.children
-this.props.map
-this.props.filter
-props是调用组件的时候传递进去的数据，一般用于组件树数据传递
+**props是调用组件的时候传递进去的数据，一般用于组件树数据传递**
 
+```js
 import React, { Component } from 'react';
 
 class PropsDemo extends Component {
@@ -205,10 +231,12 @@ export default PropsDemo;
 
 // 组件调用方式
 // <PropsDemo title="设置的标题" />
-3.3 propTypes
+```
 
+### 3.3 propTypes
 通过指定 propTypes 可以校验props属性值的类型，校验可提升开发者体验，用于约定统一的接口规范。
 
+```js
 import React, { Component, PropTypes } from 'react';
 
 class PropTypesDemo extends Component {
@@ -227,31 +255,39 @@ class PropTypesDemo extends Component {
 }
 
 export default PropTypesDemo;
-4. 调用API定义组件
+
+```
+
+## 4. 调用API定义组件
 
 用 React.createClass或者React.Component 定义组件时允许传入相应的配置及组件API的使用，包括组件生命周期提供的一系列钩子函数。
 
-4.1 组件初始定义
+### 4.1 组件初始定义
 
-getDefaultProps 得到默认属性对象，这个在ES6的时候不需要这样定义
-propTypes 属性检验规则
-mixins 组件间公用方法
-4.2 初次创建组件时调用
+- getDefaultProps 得到默认属性对象，这个在ES6的时候不需要这样定义
+- propTypes 属性检验规则
+- mixins 组件间公用方法
 
-getInitialState 得到初始状态对象
-render 返回组件树. 必须设置
-componentDidMount 渲染到 dom 树中是调用，只在客户端调用，可用于获取原生节点
-4.3 组件的属性值改变时调用
 
-componentWillReceiveProps 属性改变调用
-shouldComponentUpdate 判断是否需要重新渲染
-render 返回组件树. 必须设置
-componentDidUpdate 渲染到 dom 树中是调用, 可用于获取原生节点
-4.4 销毁组件
+### 4.2 初次创建组件时调用
 
-componentWillUnmount 组件从 dom 销毁前调用
-4.5 示例诠释组件全生命周期
+- getInitialState 得到初始状态对象
+- render 返回组件树. 必须设置
+- componentDidMount 渲染到 dom 树中是调用，只在客户端调用，可用于获取原生节点
 
+### 4.3 组件的属性值改变时调用
+
+- componentWillReceiveProps 属性改变调用
+- shouldComponentUpdate 判断是否需要重新渲染
+- render 返回组件树. 必须设置
+- componentDidUpdate 渲染到 dom 树中是调用, 可用于获取原生节点
+
+### 4.4 销毁组件
+- componentWillUnmount 组件从 dom 销毁前调用
+
+### 4.5 示例诠释组件全生命周期
+
+```js
 import React, { Component } from 'react';
 
 class LifeCycle extends Component {
@@ -299,8 +335,11 @@ class LifeCycle extends Component {
 }
 
 export default LifeCycle;
-调用组件并销毁组件示例
 
+```
+
+调用组件并销毁组件示例
+```
 import React, { Component } from 'react';
 import LifeCycleDemo from './LifeCycleDemo';
 
@@ -340,8 +379,10 @@ class DestroyComponent extends Component {
 
 export default DestroyComponent;
 
-4.6 回顾组件的渲染过程
+```
 
+### 4.6 回顾组件的渲染过程
+```js
 # 创建-》渲染-》销毁
 
 getDefaultProps()
@@ -358,12 +399,15 @@ shouldComponentUpdate()
 componentWillUpdate()
 render()
 componentDidUpdate()
-5. 使用ref对操作DOM
+```
+## 5. 使用ref对操作DOM
 
-ReactDOM.findDOMNode
-this.refs.xxx
+- ReactDOM.findDOMNode
+- this.refs.xxx
+
 获取DOM后可以方便结合现有非 react 类库的使用，通过 ref/refs 可以取得组件实例，进而取得原生节点，不过尽量通过 state/props 更新组件，不要使用该功能去更新组件的DOM。
 
+```js
 import React, { Component } from 'react';
 import ReactDOM, { findDOMNode } from 'react-dom';
 
@@ -391,8 +435,11 @@ class HandleDOMComponent extends Component {
 }
 
 export default HandleDOMComponent;
-再看一个有趣的例子
 
+```
+
+再看一个有趣的例子
+```js
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
@@ -438,10 +485,14 @@ class Slider extends Component {
 }
 
 export default Refs;
-6. 事件event
+
+```
+
+## 6. 事件event
 
 可以通过设置原生 dom 组件的 onEventType 属性来监听 dom 事件，例如 onClick, onMouseDown，在加强组件内聚性的同时，避免了传统 html 的全局变量污染
 
+```js
 'use strict';
 
 import React, { Component } from 'react';
@@ -466,26 +517,31 @@ class HandleEvent extends Component {
 }
 
 export default HandleEvent;
-注意：事件回调函数参数为标准化的事件对象，可以不用考虑 IE
 
-更多事件我们可以一起看这里
+```
 
-7. 组件的组合
+**注意：事件回调函数参数为标准化的事件对象，可以不用考虑 IE**
 
-7.1 受限组件 && 非受限组件
+更多事件我们可以一起看[这里](http://reactjs.cn/react/docs/events.html#form-events)
+
+## 7. 组件的组合
+
+### 7.1 受限组件 && 非受限组件
 
 受限组件示例：
-
+```js
 render() {
   return <input type="text" value="Hello!" />;
 }
+```
 非受限组件示例：
-
+```js
 render() {
   return <input type="text" />;
 }
-7.2 使用自定义的组件
-
+```
+### 7.2 使用自定义的组件
+```js
 'use strict';
 
 import React, { Component } from 'react';
@@ -515,10 +571,11 @@ class SelfCreateComponent extends Component {
 }
 
 export default SelfCreateComponent;
-7.3 组合 CHILDREN
 
+```
+### 7.3 组合 CHILDREN
 自定义组件中可以通过 this.props.children 访问自定义组件的子节点
-
+```js
 'use strict';
 
 import React, { Component } from 'react';
@@ -549,25 +606,31 @@ class UseChildrenComponent extends Component {
 }
 
 export default UseChildrenComponent;
-8. form表单操作
 
-8.1 React表单组件和 html 的不同点
+```
+## 8. form表单操作
 
-value/checked 属性设置后，用户输入无效
-textarea 的值要设置在 value 属性
+### 8.1 React表单组件和 html 的不同点
+- value/checked 属性设置后，用户输入无效
+- textarea 的值要设置在 value 属性
+```js
 <textarea name="description" value="This is a description." />
-select 的 value 属性可以是数组，不建议使用 option 的 selected 属性
+```
+- select 的 value 属性可以是数组，不建议使用 option 的 selected 属性
+```js
 <select multiple={true} value={['B', 'C']}>
    <option value="A">Apple</option>
    <option value="B">Banana</option>
    <option value="C">Cranberry</option>
  </select>
-input/textarea 的 onChange 用户每次输入都会触发（即使不失去焦点）
-radio/checkbox/option 点击后触发 onChange
-8.2 综合表达组件示例
+```
+- input/textarea 的 onChange 用户每次输入都会触发（即使不失去焦点）
+- radio/checkbox/option 点击后触发 onChange
+
+### 8.2 综合表达组件示例
 
 1.定义复选框组件Checkboxes
-
+```js
 import React, { Component } from 'react';
 
 class Checkboxes extends Component {
@@ -584,7 +647,12 @@ class Checkboxes extends Component {
 }
 
 export default Checkboxes;
+
+```
+
+
 2.定义单选框按钮组RadioButtons
+```js
 
 import React, { Component } from 'react';
 
@@ -605,8 +673,11 @@ class RadioButtons extends Component {
 }
 
 export default RadioButtons;
-3.FormApp组件集成两个组件并处理表单逻辑
 
+```
+
+3.FormApp组件集成两个组件并处理表单逻辑
+```js
 'use strict';
 
 import React, { Component } from 'react';
@@ -696,11 +767,15 @@ class FormApp extends Component {
 }
 
 export default FormApp;
-9. mixin共享
+
+```
+
+## 9. mixin共享
 
 mixin 是一个普通对象，通过 mixin 可以在不同组件间共享代码，使你的React程序变得更为可重用。
 
 注意，ES6语法不支持mixin写法，而是可以通过decorator去实现代码共享，这里使用ES5语法做示例说明。
+```js
 
 import React from 'react';
 
@@ -739,8 +814,11 @@ var MixinDemo = React.createClass({
 });
 
 export default MixinDemo;
-那么，接下来，我们用high-order component的方式来实现mixin：
 
+```
+
+那么，接下来，我们用high-order component的方式来实现mixin：
+```js
 import React, { Component } from 'react';
 
 let Mixin = MixinComponent => class extends Component {
@@ -800,8 +878,8 @@ class Mixins extends Component {
 }
 
 export default Mixins;
-基础部分完结寄语
+```
+
+## 基础部分完结寄语
 
 总结起来，学习的难度不高，以上内容掌握后，基本能够进行React的开发，后续我们继续相关内容的讲解，内容预告：一步步教你如何用React写一个简单完整的应用功能。
-
-```
